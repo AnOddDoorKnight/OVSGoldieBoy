@@ -9,4 +9,8 @@
     <StartupObject>GoldSplitter.App</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
