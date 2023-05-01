@@ -1,0 +1,68 @@
+﻿<Window x:Class="GoldSplitter.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:GoldSplitter"
+		mc:Ignorable="d"
+		Title="OVSGoldieBoy : Written By AnOddDoorKnight" Height="450" Width="800">
+    <Grid>
+        <Grid RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="211">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <TextBox x:Name="Total_Platinum" HorizontalAlignment="Left" Height="20" Margin="10,54,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="TotalPlatinumChanged"/>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="10,39,0,0" TextWrapping="Wrap" Text="Platinum" VerticalAlignment="Top" Width="179"/>
+            <TextBox x:Name="Total_Gold" HorizontalAlignment="Left" Height="20" Margin="10,89,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="TotalGoldChanged"/>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="10,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run Text="Gold"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="Total_Silver" HorizontalAlignment="Left" Height="20" Margin="10,125,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="TotalSilverChanged"/>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="10,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run Text="Silver"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="Total_Copper" HorizontalAlignment="Left" Height="20" Margin="10,160,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="TotalCopperChanged"/>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="10,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run Text="Copper"/><LineBreak/><Run/></TextBlock>
+            <Label x:Name="Total" Content="In Total:&#x9;0 Platinum&#xD;&#xA;&#x9;0 Gold&#xA;&#x9;0 Silver&#xD;&#xA;&#x9;0 Copper" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="179" Height="153"/>
+            <TextBlock HorizontalAlignment="Left" Height="15" Margin="10,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run FontWeight="Bold" Text="In:"/></TextBlock>
+        </Grid>
+
+        <Grid Height="419" Margin="216,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="568">
+            <Grid HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="568">
+                <Button x:Name="Button_DivideBy" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Content="Divide" Click="OnDivideByButtonClick"/>
+                <Button x:Name="Button_Add" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Content="Add" Click="AddByButtonClick" Margin="75,0,0,0"/>
+            </Grid>
+            <Grid HorizontalAlignment="Center" Height="399" Margin="0,20,0,0" VerticalAlignment="Top" Width="568">
+                <Grid x:Name="Grid_DivideBy" HorizontalAlignment="Center" Height="163" VerticalAlignment="Top" Width="568" d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="57*"/>
+                        <ColumnDefinition Width="227*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="154" Grid.ColumnSpan="2">
+                        <TextBlock Height="19" TextWrapping="Wrap" Text="People" VerticalAlignment="Top"/>
+                        <TextBox x:Name="People_DivideBy" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Margin="0,16,0,0" TextChanged="ChangePeople_DivideBy"/>
+                    </Grid>
+                    <TextBlock x:Name="TextBlock_DivideBy" HorizontalAlignment="Left" Height="65" Margin="45,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Text="Platinum: {0}&#xA;Gold: {1}&#xA;Silver: {2}&#xA;Copper: {3}" Grid.Column="1"/>
+                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="45,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="306" Grid.Column="1"><Run FontWeight="Bold" Text="Split By:                                  Remainder:"/></TextBlock>
+                    <TextBlock x:Name="TextBlock_DivideBy_Remainder" HorizontalAlignment="Left" Height="65" Margin="203,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Text="Platinum: {0}&#xA;Gold: {1}&#xA;Silver: {2}&#xA;Copper: {3}" Grid.Column="1"/>
+                </Grid>
+                <Grid x:Name="Grid_Add" HorizontalAlignment="Center" Height="163" VerticalAlignment="Top" Width="568">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="57*"/>
+                        <ColumnDefinition Width="227*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Add_Platinum" HorizontalAlignment="Left" Height="20" Margin="0,19,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="AddPlatinumChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="0,4,0,0" TextWrapping="Wrap" Text="Platinum" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="Add_Gold" HorizontalAlignment="Left" Height="20" Margin="0,54,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="AddGoldChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="0,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="2"><Run Text="Gold"/><LineBreak/><Run/></TextBlock>
+                    <TextBox x:Name="Add_Silver" HorizontalAlignment="Left" Height="20" Margin="0,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="AddSilverChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="0,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="2"><Run Text="Silver"/><LineBreak/><Run/></TextBlock>
+                    <TextBox x:Name="Add_Copper" HorizontalAlignment="Left" Height="20" Margin="0,125,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="179" TextChanged="AddCopperChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="0,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="2"><Run Text="Copper"/><LineBreak/><Run/></TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
