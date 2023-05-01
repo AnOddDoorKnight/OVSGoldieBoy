@@ -3,6 +3,8 @@
 *Odd's Very Special Goldie Boy Calculator*  
 **By AnOddDoorKnight**
 
+![](https://github.com/AnOddDoorKnight/OVSGoldieBoy/ReadmeFiles/Screenshot-2023-05-01-151605.png)
+
 This simply uses the Pathfinder 2e Gold System and automatically does calculations
 for you on a whim! No need to spend acouple minutes trying to find the exact amount
 each person will get.
