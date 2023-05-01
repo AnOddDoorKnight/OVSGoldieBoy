@@ -43,7 +43,22 @@ public partial class MainWindow : Window
 	}
 
 
-	public GoldPackage Package { get; set; } = new(0, 0, 0, 0);
+	public GoldPackage Package
+	{
+		get => package;
+		set
+		{
+			package = value;
+			if (IsInitialized)
+			{
+				Total_Platinum.Text = package.Platinum.ToString();
+				Total_Gold.Text = package.Gold.ToString();
+				Total_Silver.Text = package.Silver.ToString();
+				Total_Copper.Text = package.Copper.ToString();
+			}
+		}
+	}
+	private GoldPackage package = new(0, 0, 0, 0);
 	private readonly Grid[] subGrids;
 
 	public MainWindow()
@@ -67,6 +82,16 @@ public partial class MainWindow : Window
 				$"\t{Package.TotalGold} Gold\n" +
 				$"\t{Package.TotalSilver} Silver\n" +
 				$"\t{Package.TotalCopper} Copper";
+		if (DispersedTotal is not null)
+		{
+			GoldPackage dispersedPackage = Package.Disperse();
+			DispersedTotal.Content = $"Dispersed:\n" +
+				$"\t{dispersedPackage.Platinum} Platinum\n" +
+				$"\t{dispersedPackage.Gold} Gold\n" +
+				$"\t{dispersedPackage.Silver} Silver\n" +
+				$"\t{dispersedPackage.Copper} Copper";
+		}
+
 		UpdatePanel?.Invoke();
 	}
 
@@ -149,8 +174,20 @@ public partial class MainWindow : Window
 	#endregion
 
 	private GoldPackage AddPackage { get; set; } = new(0, 0, 0, 0);
+	private GoldPackage Result => add ? Package + AddPackage : Package - AddPackage;
+	private bool add = true;
+
 	private void AddByButtonClick(object sender, RoutedEventArgs e)
 	{
+		add = true;
+		for (int i = 0; i < subGrids.Length; i++)
+			subGrids[i].Visibility = i == 1 ? Visibility.Visible : Visibility.Hidden;
+		UpdatePanel = UpdateAddPanel;
+		Update();
+	}
+	private void RemoveByButtonClick(object sender, RoutedEventArgs e)
+	{
+		add = false;
 		for (int i = 0; i < subGrids.Length; i++)
 			subGrids[i].Visibility = i == 1 ? Visibility.Visible : Visibility.Hidden;
 		UpdatePanel = UpdateAddPanel;
@@ -158,7 +195,22 @@ public partial class MainWindow : Window
 	}
 	private void UpdateAddPanel()
 	{
-
+		if (AddTotal is not null)
+			AddTotal.Content = $"In Add Total: " +
+				$"\t{AddPackage.TotalPlatinum} Platinum\n" +
+				$"\t{AddPackage.TotalGold} Gold\n" +
+				$"\t{AddPackage.TotalSilver} Silver\n" +
+				$"\t{AddPackage.TotalCopper} Copper";
+		if (AddTotalTotal is not null)
+		{
+			GoldPackage addedPackage = Result;
+			addedPackage = addedPackage.Disperse();
+			AddTotalTotal.Content = $"Out: " +
+				$"\t{addedPackage.Platinum} Platinum\n" +
+				$"\t{addedPackage.Gold} Gold\n" +
+				$"\t{addedPackage.Silver} Silver\n" +
+				$"\t{addedPackage.Copper} Copper";
+		}
 	}
 	private void AddPlatinumChanged(object sender, TextChangedEventArgs e)
 	{
@@ -187,5 +239,10 @@ public partial class MainWindow : Window
 		if (TryParseInt(text, out int value))
 			AddPackage = new GoldPackage(AddPackage.Platinum, AddPackage.Gold, AddPackage.Silver, value);
 		Update();
+	}
+	private void SendAddToInput(object sender, RoutedEventArgs e)
+	{
+		Package = Result;
+		AddPackage = new(0, 0, 0, 0);
 	}
 }
